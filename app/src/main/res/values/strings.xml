@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">StreamingWithExoplayer</string>
+    <string name="quality_for_current_video">Quality for current video</string>
+    <string name="back">back</string>
 </resources>

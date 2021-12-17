@@ -1,5 +1,7 @@
 package com.zee.streamingwithexoplayer
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -8,6 +10,7 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.app.ActivityCompat
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -23,6 +26,10 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    companion object {
+        const val REQUEST_SETTING_CHANGE = 12
+    }
+
     @ExperimentalMaterialApi
     @ExperimentalFoundationApi
     @ExperimentalAnimationApi
@@ -59,6 +66,8 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
+
 }
 
 @ExperimentalMaterialApi
@@ -70,4 +79,7 @@ fun DefaultPreview() {
     StreamingWithExoplayerTheme {
         HomeScreen(navController = rememberNavController())
     }
+
+
+
 }

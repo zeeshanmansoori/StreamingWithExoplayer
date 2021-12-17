@@ -16,6 +16,14 @@ fun log(exception: Exception) {
     Log.e("zeeshan", "$exception")
 }
 
-fun showToast(context: Context, msg: String, duration: Int = Toast.LENGTH_SHORT) {
+fun showToast(
+    context: Context,
+    msg: String,
+    duration: Int = Toast.LENGTH_SHORT,
+    log: Boolean = false
+) {
     Toast.makeText(context, msg, duration).show()
+    if (log){
+        log(msg)
+    }
 }
