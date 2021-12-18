@@ -15,7 +15,11 @@
         <entry key="..\:/Users/zeeshan/AndroidStudioProjects/StreamingWithExoplayer/app/src/main/res/drawable/ic_settings.xml" value="0.30572916666666666" />
         <entry key="..\:/Users/zeeshan/AndroidStudioProjects/StreamingWithExoplayer/app/src/main/res/drawable/ic_speedometer.xml" value="0.301025641025641" />
         <entry key="..\:/Users/zeeshan/AndroidStudioProjects/StreamingWithExoplayer/app/src/main/res/drawable/progress_states.xml" value="0.10462962962962963" />
-        <entry key="..\:/Users/zeeshan/AndroidStudioProjects/StreamingWithExoplayer/app/src/main/res/layout/activity_video_player.xml" value="0.15709090364314326" />
+        <entry key="..\:/Users/zeeshan/AndroidStudioProjects/StreamingWithExoplayer/app/src/main/res/drawable/seek_bar_background.xml" value="0.30572916666666666" />
+        <entry key="..\:/Users/zeeshan/AndroidStudioProjects/StreamingWithExoplayer/app/src/main/res/drawable/seek_bar_progress.xml" value="0.30572916666666666" />
+        <entry key="..\:/Users/zeeshan/AndroidStudioProjects/StreamingWithExoplayer/app/src/main/res/drawable/seek_bar_progress_fill.xml" value="0.30572916666666666" />
+        <entry key="..\:/Users/zeeshan/AndroidStudioProjects/StreamingWithExoplayer/app/src/main/res/drawable/seekbar.xml" value="0.30572916666666666" />
+        <entry key="..\:/Users/zeeshan/AndroidStudioProjects/StreamingWithExoplayer/app/src/main/res/layout/activity_video_player.xml" value="0.2879999900124293" />
         <entry key="..\:/Users/zeeshan/AndroidStudioProjects/StreamingWithExoplayer/app/src/main/res/layout/player_controller.xml" value="0.15709090364314326" />
         <entry key="..\:/Users/zeeshan/AndroidStudioProjects/StreamingWithExoplayer/app/src/main/res/layout/player_controller_minimal.xml" value="0.1515625" />
         <entry key="..\:/Users/zeeshan/AndroidStudioProjects/StreamingWithExoplayer/app/src/main/res/layout/video_player.xml" value="0.1515625" />

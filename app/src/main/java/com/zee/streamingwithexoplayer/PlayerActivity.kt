@@ -10,8 +10,9 @@ import android.view.View
 import android.view.Window
 import android.widget.ImageButton
 import android.widget.ProgressBar
+import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.appcompat.widget.AppCompatSeekBar
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat.startActivity
 import androidx.core.net.toUri
@@ -56,12 +57,27 @@ class PlayerActivity : AppCompatActivity() {
 //        brightnessController?.apply {
 //            setOnTouchListener(PlayerGestureListener(this@PlayerActivity, GestureListener(this)))
 //        }
-        binding.brightnessController.setOnTouchListener(
-            PlayerGestureListener(
-                this@PlayerActivity,
-                GestureListener(binding.brightnessController)
-            )
-        )
+
+
+        binding.seekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                binding.seekbar.alpha = 1f
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                binding.seekbar.alpha = 0f
+            }
+        })
+//        binding.seekbar.setOnTouchListener(
+//            PlayerGestureListener(
+//                this@PlayerActivity,
+//                GestureListener(binding.seekbar)
+//            )
+//        )
         intent.getStringExtra(Constants.STREAM_URL)?.toUri()?.let { uri ->
 
             val mediaItem: MediaItem =
@@ -145,43 +161,41 @@ class PlayerActivity : AppCompatActivity() {
     }
 
 
-    private class GestureListener(val brightnessController: LinearLayoutCompat) :
+    private class GestureListener(val seekBar: AppCompatSeekBar) :
         MyGestureDetectorListener() {
         var job: Job? = null
 
         override fun onTap() {
-            log("Gesture Listner outside onTap")
+
         }
 
         override fun onHorizontalScroll(event: MotionEvent?, delta: Float) {
-            log("Gesture Listner outside onHorizontalScroll")
+
         }
 
         override fun onVerticalScroll(event: MotionEvent?, delta: Float) {
 
-            if (!Settings.System.canWrite(brightnessController.context)) {
+            if (!Settings.System.canWrite(seekBar.context)) {
                 val intent = Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS)
-                startActivity(brightnessController.context, intent,null)
+                startActivity(seekBar.context, intent, null)
                 return
 
             }
-            val isVisible = brightnessController.getChildAt(0).visibility == View.VISIBLE
+            val isVisible = seekBar.visibility == View.VISIBLE
             if (!isVisible) {
-                brightnessController.forEach { child ->
-                    child.visibility = View.VISIBLE
-                }
+                seekBar.visibility = View.VISIBLE
             }
-            job?.cancel()
-            job = CoroutineScope(Dispatchers.Main).launch {
-                delay(500)
-                brightnessController.forEach { child ->
-                    child.visibility = View.INVISIBLE
-                }
-            }
+//            job?.cancel()
+//            job = CoroutineScope(Dispatchers.Main).launch {
+//                delay(500)
+//                brightnessController.forEach { child ->
+//                    child.visibility = View.INVISIBLE
+//                }
+//            }
 
-            val level = extractVerticalDeltaScale(-delta, brightnessController[1] as ProgressBar)
-            log("bright value $level")
-            updateBrightnessProgressBar(level, brightnessController[1] as ProgressBar)
+            val level = extractVerticalDeltaScale(-delta, seekBar)
+
+            //updateBrightnessProgressBar(level, brightnessController[1] as ProgressBar)
 
             //log("outside onVerticalScroll val $delta")
             //ObjectAnimator.ofFloat(brightnessController,"alpha",0,1)
@@ -193,15 +207,15 @@ class PlayerActivity : AppCompatActivity() {
         }
 
         override fun onSwipeLeft() {
-            log("Gesture Listner outside onSwipeLeft")
+            log("Gesture Listener outside onSwipeLeft")
         }
 
         override fun onSwipeBottom() {
-            log("Gesture Listner outside onSwipeBottom ")
+            log("Gesture Listener outside onSwipeBottom ")
         }
 
         override fun onSwipeTop() {
-            log("Gesture Listner outside onSwipeTop")
+            log("Gesture Listener outside onSwipeTop")
         }
 
 

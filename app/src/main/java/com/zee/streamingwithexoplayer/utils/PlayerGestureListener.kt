@@ -10,7 +10,7 @@ class PlayerGestureListener(context: Context, listener: MyGestureDetectorListene
     View.OnTouchListener {
 
 
-    private var gestureDetector: GestureDetector = GestureDetector(context,listener)
+    private var gestureDetector: GestureDetector = GestureDetector(context, listener)
 
 
     override fun onTouch(v: View?, event: MotionEvent?): Boolean {
@@ -31,24 +31,32 @@ abstract class MyGestureDetectorListener : IPlayerGestureListener,
     }
 
 
-
-
     override fun onScroll(
         e1: MotionEvent?,
         e2: MotionEvent?,
         distanceX: Float,
         distanceY: Float
     ): Boolean {
+        //log("e1 ${e1?.action} distance x $distanceX")
+        //log("e2 ${e2?.action} distance y $distanceY")
+        if (e1 == null || e2 == null) return true
+        val deltaY = abs(abs(e2.y) - e1.y)
+        val deltaX = abs(abs(e2.x) - e1.x)
 
-        val deltaY = e2!!.y - e1!!.y
-        val deltaX = e2.x - e1.x
+        //log("action ${e2.action } delta y = e2.x - e1.x = $deltaY")
 
+        if (e2.action == MotionEvent.ACTION_MOVE) {
+            //log("action starting point y = ${e1.y} y_precision ${e1.yPrecision} y_raw ${e1.rawY}")
+            log("action end point y = ${e2.y} delta $deltaY and distanceY $distanceY")
+
+        }
         if (abs(deltaX) > abs(deltaY)) {
             if (abs(deltaX) > SWIPE_THRESHOLD) {
                 onHorizontalScroll(e2, deltaX);
             }
         } else {
             if (abs(deltaY) > SWIPE_THRESHOLD) {
+
                 onVerticalScroll(e2, deltaY);
             }
         }
