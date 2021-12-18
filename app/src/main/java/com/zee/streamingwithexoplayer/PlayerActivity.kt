@@ -3,6 +3,7 @@ package com.zee.streamingwithexoplayer
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.graphics.Rect
 import android.os.Bundle
 import android.provider.Settings
 import android.view.MotionEvent
@@ -24,6 +25,8 @@ import com.google.android.exoplayer2.Player
 import com.zee.streamingwithexoplayer.databinding.ActivityVideoPlayerBinding
 import com.zee.streamingwithexoplayer.utils.*
 import kotlinx.coroutines.*
+import android.view.TouchDelegate
+import androidx.compose.runtime.Composable
 
 
 class PlayerActivity : AppCompatActivity() {
@@ -49,6 +52,8 @@ class PlayerActivity : AppCompatActivity() {
         }
 
         setContentView(binding.root)
+
+        increaseClickArea(binding.root,binding.progressBar)
         binding.playerView.player = exoPLayer
         qualityBtn = binding.playerView.findViewById(R.id.quality_btn)
 
@@ -257,6 +262,38 @@ class PlayerActivity : AppCompatActivity() {
             progressBar.progress = v
 
         }
+    }
+
+    fun increaseClickArea(parent: View, child: View) {
+
+        // increase the click area with delegateArea, can be used in + create
+        // icon
+        parent.post { // Post in the parent's message queue to make sure the
+            // parent
+            // lays out its children before we call getHitRect()
+            val delegateArea = Rect()
+            child.getHitRect(delegateArea)
+            delegateArea.top -= 600
+            delegateArea.bottom += 600
+            delegateArea.left -= 600
+            delegateArea.right += 600
+            val expandedArea = TouchDelegate(
+                delegateArea,
+                child
+            )
+            // give the delegate to an ancestor of the view we're
+            // delegating the
+            // area to
+            if (View::class.java.isInstance(child.parent)) {
+                (child.parent as View).touchDelegate = expandedArea
+            }
+        }
+    }
+
+
+    @Composable
+    fun SetUpBrightnessController() {
+        
     }
 }
 
